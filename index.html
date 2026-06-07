@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Three.js Product Viewer Pro</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Vazirmatn:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <!-- App CSS -->
+<link rel="stylesheet" href="./src/style.css" />
+</head>
+<button id="menuToggleFab" class="menu-fab" type="button" aria-label="Toggle menu">☰</button>
+
+<body>
+  <div class="app">
+    <!-- Topbar -->
+    <header class="topbar">
+      <h1>نمایشگر سه بعدی محصولات</h1>
+      <p></p>قابل استفاده برای معرفی و نمایش محصولات خود بصورت کاملا حرفه ای
+    </header>
+
+    <!-- Viewer -->
+    <section class="viewer-wrap" id="viewerWrap">
+      <!-- WebGL Canvas -->
+      <canvas id="webgl" aria-label="3D Viewer Canvas"></canvas>
+
+      <!-- Loader Overlay -->
+      <div class="loader hidden" id="loader">
+        <div class="loader-box">
+          <p>در حال بارگذاری مدل...</p>
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <span id="progressText">0%</span>
+        </div>
+      </div>
+
+      <!-- Pro Control Panel -->
+      <div class="panel pro-panel" id="proPanel">
+        <button id="snapshotBtn" title="Export PNG">Snapshot</button>
+
+
+        <!-- Upload / Reset -->
+        <div class="panel-group">
+          <span class="group-label">فایل</span>
+
+          <label class="upload-btn" for="fileInput" title="آپلود مدل GLB/GLTF">
+            <i class="ti ti-upload"></i>
+            آپلود
+          </label>
+          <input id="fileInput" type="file" accept=".glb,.gltf" hidden />
+
+          <button id="resetBtn" type="button" title="بازگردانی وضعیت">
+            <i class="ti ti-refresh"></i>
+            Reset
+          </button>
+        </div>
+
+        <!-- Material / Colors -->
+        <div class="panel-group">
+          <span class="group-label">متریال</span>
+
+          <button id="colorPurpleBtn" type="button" class="chip purple" title="رنگ بنفش">
+            <span class="dot"></span>
+            Purple
+          </button>
+
+          <button id="colorCyanBtn" type="button" class="chip cyan" title="رنگ فیروزه‌ای">
+            <span class="dot"></span>
+            Cyan
+          </button>
+
+          <button id="restoreMatBtn" type="button" title="بازگردانی متریال اصلی">
+            <i class="ti ti-paint-off"></i>
+            Restore
+          </button>
+        </div>
+
+        <!-- View Options -->
+        <div class="panel-group">
+          <span class="group-label">نمایش</span>
+
+          <label class="switch" title="نمایش وایرفریم">
+            <input type="checkbox" id="wireframeToggle" />
+            <i class="ti ti-grid-dots"></i>
+            Wireframe
+          </label>
+        </div>
+
+        <!-- Camera Presets -->
+        <div class="panel-group camera-group" role="group" aria-label="Camera Presets">
+          <span class="group-label">دوربین</span>
+
+          <button type="button" data-cam="front" title="نمای روبرو">
+            <i class="ti ti-view-360"></i>
+            Front
+          </button>
+
+          <button type="button" data-cam="back" title="نمای پشت">
+            <i class="ti ti-rotate-2"></i>
+            Back
+          </button>
+
+          <button type="button" data-cam="left" title="نمای چپ">
+            <i class="ti ti-arrow-left"></i>
+            Left
+          </button>
+
+          <button type="button" data-cam="right" title="نمای راست">
+            <i class="ti ti-arrow-right"></i>
+            Right
+          </button>
+
+          <button type="button" data-cam="top" title="نمای بالا">
+            <i class="ti ti-arrow-up"></i>
+            Top
+          </button>
+
+          <button type="button" data-cam="iso" class="active" title="نمای ایزومتریک">
+            <i class="ti ti-cube"></i>
+            Iso
+          </button>
+
+          <button type="button" id="fitViewBtn" title="تنظیم کادر روی مدل">
+            <i class="ti ti-focus-2"></i>
+            Fit
+          </button>
+        </div>
+
+        <!-- Explode -->
+        <div class="panel-group explode-group">
+          <span class="group-label">Explode</span>
+
+          <div class="range-wrap">
+            <i class="ti ti-arrows-diagonal-2"></i>
+            <input id="explodeRange" type="range" min="0" max="2" step="0.01" value="0" />
+            <span id="explodeValue">0.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main App Script -->
+  <!-- نکته: این فایل باید منطق سه‌بعدی شما (Three.js + Loader + Controls + Events) را داشته باشد -->
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
